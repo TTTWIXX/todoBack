@@ -1,4 +1,4 @@
-package com.example.todo.todoapi.controller;
+package com.example.todo.todoapi.api;
 
 import com.example.todo.todoapi.dto.request.TodoCreateRequestDTO;
 import com.example.todo.todoapi.dto.request.TodoModifyRequestDTO;
@@ -10,16 +10,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/api/todos")
-@CrossOrigin(origins = "http://localhost:3000") // 3000번 포트에서는 통신을 하면 허락해준다!!!
+@CrossOrigin(origins = "http://localhost:3000")
 public class TodoController {
 
     private final TodoService todoService;
+
     // 할 일 등록 요청
     @PostMapping
     public ResponseEntity<?> createTodo(
@@ -102,6 +104,4 @@ public class TodoController {
                     .body(TodoListResponseDTO.builder().error(e.getMessage()));
         }
     }
-
-
 }
